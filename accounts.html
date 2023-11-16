@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transactions</title>
+    <title>Accounts</title>
     <style>
         /* CSS Styles */
-        body {
+         body {
             background-color: #f4f4f4;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -87,7 +87,6 @@
         th {
             background-color: #4e54c8;
             color: #fff;
-        
         }
 
         /* ... (existing CSS styles) ... */
@@ -103,44 +102,39 @@
         <nav>
             <a href="dashboard.html">Home</a>
             <a href="transactions.html">Transactions</a>
-            <a href="Accounts.html">Accounts</a>
+            <a href="accounts.html">Accounts</a>
             <a href="blacklisted.html">Blacklisted</a>
             <a href="contactus.html">Contact Us</a>
             <button onclick="logout()">Sign Out</button>
         </nav>
 
         <div class="dashboard-content">
-            <h2>Transactions</h2>
-            <button onclick="deleteTransactions()">Delete All Transactions</button>
-            <table id="transactionsTable">
+            <h2>Accounts</h2>
+            <table id="accountsTable">
                 <thead>
                     <tr>
                         <th>User ID</th>
                         <th>Amount</th>
-                        <th>Date</th>
-                        <th>Type</th>
+                        <th>Account Type</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2023-11-15</td>
-                        <td>Online Purchase</td>
-                        <td>$100.00</td>
-                        <td>Shopping</td>
+                        <td>1001</td>
+                        <td>$5000.00</td>
+                        <td>Savings</td>
                     </tr>
                     <tr>
-                        <td>2023-11-15</td>
-                        <td>Online Payment</td>
-                        <td>$80.00</td>
-                        <td>Bills</td>
+                        <td>1002</td>
+                        <td>$2000.00</td>
+                        <td>Checking</td>
                     </tr>
                     <tr>
-                        <td>2023-11-15</td>
-                        <td>ATM Withdrawal</td>
-                        <td>$50.00</td>
-                        <td>Withdrawal</td>
+                        <td>1003</td>
+                        <td>$8000.00</td>
+                        <td>Investment</td>
                     </tr>
-                    <!-- Add more transactions as needed -->
+                    <!-- Add more accounts as needed -->
                 </tbody>
             </table>
         </div>
@@ -152,12 +146,6 @@
             // For simplicity, redirect to the login page
             window.location.href = 'login.html';
         }
-
-        function deleteTransactions() {
-            var table = document.getElementById("transactionsTable");
-            var tbody = table.getElementsByTagName("tbody")[0];
-            tbody.innerHTML = "";
-			}
     </script>
 
 </body>

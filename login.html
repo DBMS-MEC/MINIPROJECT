@@ -68,43 +68,11 @@
 
     <script>
         function login() {
-            // Get login credentials
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-    
-            // Create an object with the login data
-            const loginData = {
-                username: username,
-                password: password
-            };
-    
-            // Perform login logic
-            fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(loginData)
-            })
-            .then(response => {
-                console.log('Login response:', response); // Log the entire response
-                return response.json();
-            })
-            .then(data => {
-                console.log('Login data:', data); // Log the parsed JSON data
-                if (data && data.error) {
-                    console.error('Login failed:', data.error);
-                } else {
-                    // Redirect to the dashboard after successful login
-                    window.location.href = 'dashboard';
-                }
-            })
-            .catch(error => {
-                console.error('Error during login:', error);
-            });
+            // Perform authentication logic here
+            // For simplicity, redirect to the dashboard after login
+            window.location.href = 'dashboard.html';
         }
     </script>
-    
 
 </body>
 </html>
