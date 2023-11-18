@@ -1,3 +1,6 @@
+--enter below command in terminal to import database
+--mysql -u <username> -p <dbname> < db.sql
+
 -- MySQL dump 10.13  Distrib 8.2.0, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mini_project
