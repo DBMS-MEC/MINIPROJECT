@@ -73,6 +73,16 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(__dirname + '/dashboard.html');
 });
 
+
+app.get('/transactions', (req, res) => {
+  res.sendFile(__dirname + '/transactions.html');
+});
+
+
+app.get('/accounts', (req, res) => {
+  res.sendFile(__dirname + '/accounts.html');
+});
+
 app.get('/signup', (req, res) => {
   res.sendFile(__dirname + '/signup.html');
 });
