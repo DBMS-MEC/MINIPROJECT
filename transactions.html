@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions</title>
     <style>
-        /* CSS Styles */
+        
         body {
             background-color: #f4f4f4;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            flex: 1;
             margin: 0;
             padding: 0;
             color: #333;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
         }
 
         header {
@@ -49,12 +53,12 @@
         }
 
         .dashboard-content {
-            padding: 25px;
-			flex: 1;
+            padding: 20px;
+            flex: 1;
             background-color: #fff;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            margin: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
         }
 
         button {
@@ -87,10 +91,7 @@
         th {
             background-color: #4e54c8;
             color: #fff;
-        
         }
-
-        /* ... (existing CSS styles) ... */
     </style>
 </head>
 <body>
@@ -98,67 +99,62 @@
     <header>
         <h1>Banking Dashboard</h1>
     </header>
-
     <div style="display: flex;">
         <nav>
-            <a href="/dashboard">Home</a>
-            <a href="/transactions">Transactions</a>
-            <a href="/Accounts">Accounts</a>
-            <a href="/blacklisted">Blacklisted</a>
-            <a href="/contactus">Contact Us</a>
+            <a href="dashboard.html">Home</a>
+            <a href="transactions.html">Transactions</a>
+            <a href="Accounts.html">Accounts</a>
+            <a href="blacklisted.html">Blacklisted</a>
+            <a href="contactus.html">Contact Us</a>
             <button onclick="logout()">Sign Out</button>
         </nav>
-
-        <div class="dashboard-content">
-            <h2>Transactions</h2>
-            <button onclick="deleteTransactions()">Delete All Transactions</button>
-            <table id="transactionsTable">
-                <thead>
+        
+    <div class="dashboard-content">
+        <h2>Transactions</h2>
+        <table id="transactionsTable">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% transactions.forEach(function(transaction) { %>
                     <tr>
-                        <th>Date</th>
-                        <th>Mode</th>
-                        <th>Amount</th>
-                        <th>Type</th>
+                        <td><%= transaction.userId %></td>
+                        <td><%= transaction.amount %></td>
+                        <td><%= transaction.date %></td>
+                        <td><%= transaction.time %></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2023-11-15</td>
-                        <td>Online Purchase</td>
-                        <td>$100.00</td>
-                        <td>Shopping</td>
-                    </tr>
-                    <tr>
-                        <td>2023-11-15</td>
-                        <td>Online Payment</td>
-                        <td>$80.00</td>
-                        <td>Bills</td>
-                    </tr>
-                    <tr>
-                        <td>2023-11-15</td>
-                        <td>ATM Withdrawal</td>
-                        <td>$50.00</td>
-                        <td>Withdrawal</td>
-                    </tr>
-                    <!-- Add more transactions as needed -->
-                </tbody>
-            </table>
-            
-        </div>
+                <% }); %>
+            </tbody>
+        </table>
     </div>
 
     <script>
-        function logout() {
-            // Perform logout logic if needed
-            // For simplicity, redirect to the login page
-            window.location.href = '/';
-        }
+        const express = require('express');
+const app = express();
 
-        function deleteTransactions() {
-            var table = document.getElementById("transactionsTable");
-            var tbody = table.getElementsByTagName("tbody")[0];
-            tbody.innerHTML = "";
-			}
+// Route to render the transactions.ejs file
+app.get('/transactions', async (req, res) => {
+    try {
+        // Fetch transaction data from the database or any other source
+        const transactions = await TransactionModel.find({ /* Your query here */ });
+
+        // Render the transactions.ejs file and pass the transaction data
+        res.render('transactions', { transactions });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+	    app.listen(3000, () => {
+    console.log('Server running on port 3000');
+});
+
     </script>
 
 </body>
