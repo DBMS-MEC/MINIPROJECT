@@ -22,6 +22,7 @@ const pool = mysql.createPool({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/login.html');
@@ -75,13 +76,54 @@ app.get('/dashboard', (req, res) => {
 
 
 app.get('/transactions', (req, res) => {
-  res.sendFile(__dirname + '/transactions.html');
+  // Query to select all transactions from the user_transaction table
+  const sql = 'SELECT * FROM user_transaction';
+
+  // Execute the query
+  pool.query(sql, (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      // Render the transactions.html file and pass the result to it
+      res.render('transactions.ejs', { transactions: results });
+    }
+  });
 });
+
 
 
 app.get('/accounts', (req, res) => {
-  res.sendFile(__dirname + '/accounts.html');
+ // Query to select all transactions from the user_transaction table
+ const sql = 'SELECT * FROM accounts';
+
+ // Execute the query
+ pool.query(sql, (error, results) => {
+   if (error) {
+     console.error(error);
+     res.status(500).json({ error: 'Internal Server Error' });
+   } else {
+     // Render the transactions.html file and pass the result to it
+     res.render('accounts.ejs', { accounts: results });
+   }
+ });
 });
+
+app.get('/blacklisted', (req, res) => {
+  // Query to select all transactions from the user_transaction table
+  const sql = 'SELECT * FROM blacklist;';
+ 
+  // Execute the query
+  pool.query(sql, (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      // Render the transactions.html file and pass the result to it
+      res.render('blacklist.ejs', { blacklists: results });
+    }
+  });
+ });
 
 app.get('/signup', (req, res) => {
   res.sendFile(__dirname + '/signup.html');

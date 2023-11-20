@@ -1,10 +1,12 @@
-<!-- dashboard.html -->
+<!-- views/transactions.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banking Dashboard</title>
+    <title>Transactions</title>
+    <!-- Include your existing CSS styles -->
     <style>
         body {
             background-color: #f4f4f4;
@@ -12,9 +14,6 @@
             margin: 0;
             padding: 0;
             color: #333;
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
         }
 
         header {
@@ -52,12 +51,12 @@
         }
 
         .dashboard-content {
-            padding: 20px;
-            flex: 1;
+            padding: 25px;
+			flex: 1;
             background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            margin: 20px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin: 30px;
         }
 
         button {
@@ -90,7 +89,9 @@
         th {
             background-color: #4e54c8;
             color: #fff;
+        
         }
+        /* ... (your existing CSS styles) ... */
     </style>
 </head>
 <body>
@@ -100,19 +101,33 @@
     </header>
 
     <div style="display: flex;">
-        <nav>
-            <a href="/dashboard">Home</a>
-            <a href="/transactions">Transactions</a>
-            <a href="/Accounts">Accounts</a>
-            <a href="/blacklisted">Blacklisted</a>
-            <a href="/contactus">Contact Us</a>
-            <button onclick="logout()">Sign Out</button>
-        </nav>
+        <%- include("header.ejs") %>
 
         <div class="dashboard-content">
-            <h2>Welcome to your professional banking dashboard!</h2>
-            
-            <!-- Additional dashboard content goes here -->
+            <h2>Transactions</h2>
+            <button onclick="deleteTransactions()">Delete All Transactions</button>
+            <table id="transactionsTable">
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Date</th>
+                        <th>Mode</th>
+                        <th>Amount</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <% transactions.forEach(transaction => { %>
+                        <tr>
+                            <td><%= transaction.TransactionID %></td>
+                            <td><%= new Date(transaction.T_Date).toLocaleDateString() %></td>
+                            <td><%= transaction.T_Type %></td>
+                            <td>Rs <%= transaction.Amount.toFixed(2) %></td>
+                            
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -121,6 +136,10 @@
             // Perform logout logic if needed
             // For simplicity, redirect to the login page
             window.location.href = '/';
+        }
+
+        function deleteTransactions() {
+            // Implement logic to delete transactions if needed
         }
     </script>
 

@@ -1,20 +1,17 @@
-<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banking Dashboard</title>
+    <title>Accounts</title>
     <style>
-        body {
+        /* CSS Styles */
+         body {
             background-color: #f4f4f4;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
         }
 
         header {
@@ -52,12 +49,12 @@
         }
 
         .dashboard-content {
-            padding: 20px;
-            flex: 1;
+            padding: 25px;
+			flex: 1;
             background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            margin: 20px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin: 30px;
         }
 
         button {
@@ -91,6 +88,8 @@
             background-color: #4e54c8;
             color: #fff;
         }
+
+        /* ... (existing CSS styles) ... */
     </style>
 </head>
 <body>
@@ -100,19 +99,31 @@
     </header>
 
     <div style="display: flex;">
-        <nav>
-            <a href="/dashboard">Home</a>
-            <a href="/transactions">Transactions</a>
-            <a href="/Accounts">Accounts</a>
-            <a href="/blacklisted">Blacklisted</a>
-            <a href="/contactus">Contact Us</a>
-            <button onclick="logout()">Sign Out</button>
-        </nav>
+        <%- include("header.ejs") %>
 
         <div class="dashboard-content">
-            <h2>Welcome to your professional banking dashboard!</h2>
-            
-            <!-- Additional dashboard content goes here -->
+            <h2>Accounts</h2>
+            <table id="accountsTable">
+                <thead>
+                    <tr>
+                        <th>Blacklist ID</th>
+                        <th>Reason</th>
+                        <th>Date Added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% blacklists.forEach(blacklist => { %>
+                        <tr>
+                            <td><%= blacklist.BlacklistID %></td>
+                            <td><%= blacklist.Reason %></td>
+                            
+                            <td><%= new Date(blacklist.DateAdded).toLocaleDateString() %></td>
+                            
+                            
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
         </div>
     </div>
 
